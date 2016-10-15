@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee"  xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  <display-name>auto</display-name>
+  <welcome-file-list>
+    <welcome-file>Login.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>DriveLoginServlet</display-name>
+    <servlet-name>DriveLoginServlet</servlet-name>
+    <servlet-class>Servlets.DriveLoginServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DriveLoginServlet</servlet-name>
+    <url-pattern>/DriveLoginServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DriveLoginServletCallback</display-name>
+    <servlet-name>DriveLoginServletCallback</servlet-name>
+    <servlet-class>Servlets.DriveLoginServletCallback</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DriveLoginServletCallback</servlet-name>
+    <url-pattern>/DriveLoginServletCallback</url-pattern>
+  </servlet-mapping>
+</web-app>
