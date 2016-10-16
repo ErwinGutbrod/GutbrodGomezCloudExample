@@ -45,8 +45,8 @@ public class DriveLoginServlet extends AbstractAuthorizationCodeServlet {
 
 	@Override
 	protected String getUserId(HttpServletRequest req) throws ServletException, IOException {
-		// return user ID
-		return null;
+		String name=req.getParameter("txtUserName");
+		return name;
 	}
 
 	@Override
