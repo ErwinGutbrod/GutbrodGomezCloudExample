@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Success Page</title>
+<title>Insert title here</title>
 </head>
 <body>
-<h1>Hi user name and password not match try again <a href="login.jsp">Back to Login</a>  </h1>
+SUCESSSS
 </body>
 </html>
