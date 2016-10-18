@@ -63,7 +63,7 @@ function signInCallback(authResult) {
       url: 'http://localhost:8080/GutbrodGomezCloudExample/DriveRootFilesServlet',
       contentType: 'application/octet-stream; charset=utf-8',
       success: function(result) {
-        // Handle or verify the server response.
+    	  window.location.href = "DriveFiles.jsp";
       },
       processData: false,
       data: authResult['code']
