@@ -101,7 +101,7 @@ public class DriveRootFilesServlet extends HttpServlet {
 		String familyName = (String) payload.get("family_name");
 		String givenName = (String) payload.get("given_name");
 		
-		
+		List<String> fleNames = new ArrayList<String>();
 		   List<File> result = new ArrayList<File>();
 		    Files.List requestListFiles = drive
                     .files()
@@ -122,9 +122,12 @@ public class DriveRootFilesServlet extends HttpServlet {
 		    } while (requestListFiles.getPageToken() != null &&
 		    		requestListFiles.getPageToken().length() > 0);
 
-		    
+			for(int i=0; i<result.size(); i++){
+		        fleNames.add(result.get(i).getTitle());
+		        System.out.println(fleNames.get(i));
+		      }
 		  }
-		
+
 
 
 }
