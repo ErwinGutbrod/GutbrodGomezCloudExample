@@ -3,14 +3,14 @@ package Servlets;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.api.client.auth.oauth2.TokenResponse;
-import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeRequestUrl;
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeTokenRequest;
 import com.google.api.client.googleapis.auth.oauth2.GoogleClientSecrets;
 import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
@@ -19,10 +19,10 @@ import com.google.api.client.googleapis.auth.oauth2.GoogleTokenResponse;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.services.drive.Drive;
+import com.google.api.services.drive.Drive.Files;
 import com.google.api.services.drive.model.File;
-import com.google.appengine.api.users.User;
-import com.google.appengine.api.users.UserService;
-import com.google.appengine.api.users.UserServiceFactory;
+import com.google.api.services.drive.model.FileList;
+
 
 /**
  * Servlet implementation class DriveRootFilesServlet
@@ -87,7 +87,7 @@ public class DriveRootFilesServlet extends HttpServlet {
 		    new Drive.Builder(new NetHttpTransport(), JacksonFactory.getDefaultInstance(), credential)
 		        .setApplicationName("Auth Code Exchange Demo")
 		        .build();
-		File file = drive.files().get("root").execute();
+		//File file = drive.files().get("root").execute();
 
 		// Get profile info from ID token
 		GoogleIdToken idToken = tokenResponse.parseIdToken();
@@ -100,9 +100,31 @@ public class DriveRootFilesServlet extends HttpServlet {
 		String locale = (String) payload.get("locale");
 		String familyName = (String) payload.get("family_name");
 		String givenName = (String) payload.get("given_name");
-	}
+		
+		
+		   List<File> result = new ArrayList<File>();
+		    Files.List requestListFiles = drive
+                    .files()
+                    .list()
+                    .setQ("'root' in parents  and trashed=false");
 
+		    do {
+		      try {
+		        FileList files = requestListFiles.execute();
 
+		        result.addAll(files.getItems());
+		        System.out.println(result);
+		        requestListFiles.setPageToken(files.getNextPageToken());
+		      } catch (IOException e) {
+		        System.out.println("An error occurred: " + e);
+		        requestListFiles.setPageToken(null);
+		      }
+		    } while (requestListFiles.getPageToken() != null &&
+		    		requestListFiles.getPageToken().length() > 0);
+
+		    
+		  }
+		
 
 
 }
