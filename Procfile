@@ -1,1 +1,1 @@
-web: java -jar target/gutbrodgomezcloudexample.jar
+web: java $JAVA_OPTS -jar target/*.war
